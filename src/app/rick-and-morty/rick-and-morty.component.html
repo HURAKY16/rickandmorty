@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="cards-container">
+    <div *ngFor="let character of characters" class="character-card-container" (click)="selectCharacter(character)">
+      <div class="character-card" [class.flipped]="character.isFlipped">
+        <div class="character-card-front">
+          <h2>{{ character.name }}</h2>
+          <img [src]="character.image" alt="{{ character.name }}">
+          <p>Status: {{ character.status }}</p>
+          <p>Species: {{ character.species }}</p>
+          <p>Origin: {{ character.origin.name }}</p>
+        </div>
+        
+        <div class="character-card-back">
+          <h2>{{ character.name }}</h2>
+          <p>Episodes: {{ character.episode.length }}</p>
+          <ul>
+            <li *ngFor="let episode of character.episode">
+              Episode {{ episode.split('/').pop() }}: 
+              <span *ngIf="episodeDetails[episode.split('/').pop()]">
+                {{ episodeDetails[episode.split('/').pop()].name }} (Air Date: {{ episodeDetails[episode.split('/').pop()].air_date }})(Episode: {{ episodeDetails[episode.split('/').pop()].episode }})
+                (Created: {{ episodeDetails[episode.split('/').pop()].created }})
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
